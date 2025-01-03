@@ -1,31 +1,23 @@
-package b5597;
+package b3052;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = null;
-		StringBuilder sb = new StringBuilder();
 		
-		boolean[] submitted = new boolean[31];
-		
-		for(int i=0; i<28; i++) {
+		Set<Integer> s = new HashSet<>();
+		for(int i=0; i<10; i++) {
 			st = new StringTokenizer(br.readLine());
 			int n = Integer.parseInt(st.nextToken());
-			submitted[n] = true;
+			s.add(n%42);
 		}
-		
-		for(int j=1; j<31; j++) {
-			if(submitted[j]!=true) {
-				sb.append(j).append("\n");          //어떻게하면 반복문 안에서 서로 스위칭할수 있을까...
-				}
-			}
-		
-		System.out.println(sb);
-		
-	}	
+		System.out.println(s.size());
+	}
 }
