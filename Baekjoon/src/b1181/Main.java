@@ -3,37 +3,47 @@ package b1181;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int a = Integer.parseInt(br.readLine());
+		int n = Integer.parseInt(br.readLine());
 		
-		// 문자열을 입력받음. 각 문자열의 길이를 비교하고 또한 아스키 값을 비교..
+		String[] s = new String[n];
 		
-		//문자열의 길이는 50을 넘진 않는다 ... 하지만 알고리즘을 짜야 할 것 같다..
-		
-		String[] array = new String[a+1]; //값 저장소를 위해 하나 더 만들자
-		
-		for(int i=0; i<a; i++) {
-			array[i] = br.readLine();
+		for(int i=0; i<n; i++) {
+			s[i] = br.readLine();
 		}
+		//비교를 하는 메서드지. 같다면 알파벳 순으로 정렬해. 비교해서. 다르다면 길이의 차를 리턴해. 리턴값을 쓰나?
+		//compareTo()는 아마 단어 정렬 메서드 알파벳 순서
 		
-		//for 문으로 array[i]의 길이와 array[i+1]의 길이를 비교. array[a]에 저장
+		Arrays.sort(s, new Comparator<String>(){
+			public int compare(String o1, String o2) {
+				if(o1.length() == o2.length()) {
+					return o1.compareTo(o2);
+				}
+				else {
+					return o1.length() - o2.length();
+				}
+				
+			}
+		});
 		
-		for(int i=0; i<a-1; i++) {
-				if(array[i].length() > array[i+1].length()) {
-					array[a] = array[i];
-					array[i] = array[i+1];
-					array[i+1] = array[a];
+		for(int i=0; i<n; i++) {
+			if(i!=0) {
+				if(s[i].compareTo(s[i-1])!=0) {
+					System.out.println(s[i]);
+				}
+				else 
+					System.out.println(s[i]);
 			}
 		}
-		 
 		
-		for(int i=0; i<a; i++) {
-			System.out.println(array[i]);
-		}
+		
+		
 	}
 }
 

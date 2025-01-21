@@ -6,49 +6,46 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-	
-	static int N, M, V;
-	static int[][]array;
-	static boolean[] visited;
-	
 	static StringBuilder sb = new StringBuilder();
+	static boolean[] visited;
+	static int[][] array;
+	
 	
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		V = Integer.parseInt(st.nextToken());	
 		
-		array = new int[N+1][N+1];
-		visited = new boolean[N+1];
+		int nodenumber = Integer.parseInt(st.nextToken());
+		int linenumber = Integer.parseInt(st.nextToken());
+		int startnode = Integer.parseInt(st.nextToken());
 		
+		array = new int[nodenumber+1][nodenumber+1];
+		visited = new boolean[nodenumber+1];
 		
-		for(int i=0; i<M; i++) {
+		for(int i=0; i<linenumber; i++) {
 			StringTokenizer nst = new StringTokenizer(br.readLine());
-			
 			int a = Integer.parseInt(nst.nextToken());
-			int b = Integer.parseInt(nst.nextToken());	
-			
-			array[a][b] = array[b][a] = 1;
+			int b = Integer.parseInt(nst.nextToken());
+			array[a][b] = array[b][a] = 1; //양방향 간선이다.
 		}
-	
-		dfs(V);
-		System.out.println(sb);
+		dfs(startnode);
 		
-
+		
+		
+		
 	}
-	private static void dfs(int V) {
-		visited[V] = true;
-		sb.append(V + " ");
+	
+	public static void dfs(int startnode) {
+		visited[startnode] = true;
+		System.out.print(startnode + " ");
 		
-		for(int i = 0 ; i <= N ; i++) {          //3 true 3     i는 0 <= 5까면 0 1 2 3 4 5 0일때 array[3][0]  i =1 일때 array[3][1] ==1 && visited[1] == false;
-			if(array[V][i] == 1 && !visited[i])       //즉 dfs(1); 1을 true로하고 1을 넣는다. 3 1     그리고 아직 3 4
+		for(int i=1; i<array.length; i++) { //전체 노드 순회
+			if(array[startnode][i] == 1 && visited[i] == false) { //현재 방문한 노드가 간선이 존재하는 지 확인& 방문한적 없는지
+				// 방문한적이 없다면 해당 i값에 대해 dfs를 실행하면 다음에 도착한 노드를 true로, 그리고 도착한 곳 출력 반복
 				dfs(i);
+			}
 		}
-
-	}	
-
+		
+	}
 }
 
