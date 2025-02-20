@@ -8,14 +8,15 @@ import java.util.StringTokenizer;
 public class Main {
 	static boolean[] visited;
 	static int[][] array;
-	
+	static int count =-1;
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int computernumber = Integer.parseInt(br.readLine());
 		int computerline = Integer.parseInt(br.readLine());
-		int startcomputer = Integer.parseInt(br.readLine());
+		int startcomputer = 1;
+	
 		
 		array = new int[computernumber+1][computernumber+1];
 		visited = new boolean[computernumber+1];
@@ -28,16 +29,17 @@ public class Main {
 			array[a][b] = array[b][a] = 1;
 		}
 		dfs(startcomputer);
-		
+		System.out.println(count);
 		
 	}
 	
 	public static void dfs(int startcomputer) {
 		visited[startcomputer] = true;
-		System.out.println(startcomputer + " ");
-		
-		if(startcomputer == array.length) {
-			
+		count++;
+		for(int i=1; i<array.length; i++) {
+			if(array[startcomputer][i] == 1 && visited[i] == false) {
+				dfs(i);
+			}
 		}
 		
 		
