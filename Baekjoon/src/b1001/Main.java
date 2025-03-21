@@ -10,7 +10,7 @@ public class Main {
 		int b = scan.nextInt();
 		
 		System.out.println(a-b);
-
+		//놓친 테스트
 	}
 
 }
